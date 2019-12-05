@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template2">
+<head>
+<meta charset="utf-8"/>
+<title>Faire une Commande</title>
+        <script>
+            
+            var rIndex;
+            var table = document.getElementById("table");
+            	
+            // check the empty input
+            function checkEmptyInput()
+            {
+                var isEmpty = false,
+                    fname = document.getElementById("fname").value,
+                    lname = document.getElementById("lname").value;
+                    
+            
+                if(fname === ""){
+                    alert("ID article ne peut pas etre null");
+                    isEmpty = true;
+                }
+                else if(lname === ""){
+                    alert("Quantite ne peut pas etre null");
+                    isEmpty = true;
+                }
+                
+                return isEmpty;
+            }
+            var rIndex;
+            var table = document.getElementById("table");
+            // add Row
+            var i=0;
+            function addHtmlTableRow()
+            {
+            	var rIndex;
+            var table = document.getElementById("table");
+                // get the table by id
+                // create a new row and cells
+                // get value from input text
+                // set the values into row cell's
+                if(!checkEmptyInput()){
+                	
+                var newRow = table.insertRow(table.length),
+                    cell1 = newRow.insertCell(0),
+                    cell2 = newRow.insertCell(1),
+                    
+                    fname = document.getElementById("fname").value,
+                    lname = document.getElementById("lname").value;
+                    
+            
+             //   cell1.innerHTML = "<label>achraf</label>";
+              //  cell2.innerHTML = lname;
+               cell1.innerHTML= '<input type="text" name="idarticle_'+i+'" value='+fname+' />';
+               cell2.innerHTML= '<input type="text" name="quantite_'+i+'" value='+lname+' />';
+               document.getElementById("nombre_de_ligne").value=i;
+                i++;
+                // call the function to set the event to the new row
+                selectedRowToInput();
+            }
+            }
+            
+            // display selected row data into input text
+            function selectedRowToInput()
+            {
+            	
+                 var table = document.getElementById("table");
+                for(var i = 1; i < table.rows.length; i++)
+                {
+                    table.rows[i].onclick = function()
+                    {
+                      // get the seected row index
+                      rIndex = this.rowIndex;
+                      document.getElementById("fname").value = this.cells[0].innerHTML;
+                      document.getElementById("lname").value = this.cells[1].innerHTML;
+                      
+                    };
+                }
+            }
+            selectedRowToInput();
+            
+            function editHtmlTbleSelectedRow()
+            { selectedRowToInput();
+            	var rIndex;
+            var table = document.getElementById("table");
+                var fname = document.getElementById("fname").value,
+                    lname = document.getElementById("lname").value;
+                   
+               if(!checkEmptyInput()){
+                table.rows[rIndex].cells[0].innerHTML = fname;
+                table.rows[rIndex].cells[1].innerHTML = lname;
+                
+              }
+            }
+            
+            function removeSelectedRow()
+            {
+            table.deleteRow(0);
+                // clear input text
+                document.getElementById("fname").value = "";
+                document.getElementById("lname").value = "";
+                
+            }
+        </script>
+</head>
+<body>
+<div layout:fragment="content">
+	
+	<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information " src="/images/category.png" height="40" width="30">Les categorie existant</div>
+	<div class="panel-body">	
+	
+		<table class="table table-striped">
+	<tr>
+	<th>ID categorie</th><th>nom</th>
+	</tr>
+	<tr th:each="c:${listcategorie}">
+		<td th:text="${c.id_categorie}"></td><td th:text="${c.nom_categorie}">
+	
+	
+	</table>
+	<div class="container">
+	<ul class="nav nav-pills">
+	<li th:each="p,status:${pages}">
+	<a th:href="@{/Commande(page=${status.index})}" th:text="${status.index}"></a>
+	
+	</li>
+	</ul>
+	</div>
+	
+	</div>
+	</div>
+	</div>		
+	
+		
+ 		
+		<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="consulter superviseur" src="/images/rechercher.png" height="35" width="30">consultation article par categorie</div>
+	<div class="panel-body">	
+	
+		<form th:action="@{/Commande}" method="get">
+			<div>
+				<label>consulter categorie:</label>
+				<input type="text" name="id_categorie"/>
+				<button type="submit" class="btn btn-primary">OK</button>
+				<div class="text-danger" th:if="${exception}" th:text="${exception}">
+				
+		</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	</div>	
+		<div class="col-md-8">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information sur les superviseur" src="/images/menu.png" height="30" width="30">les article qui se trouve dans la categorie: <label th:text="${nom_categorie}"></label></div>
+	<div class="panel-body">	
+
+		<table class="table table-striped">
+	<thead>
+	<tr>
+	<th>ID article</th><th>Nom</th><th>Prix untaire</th><th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr th:each="s:${listearticleparcat}">
+		<td th:text="${s.id_article}"></td><td th:text="${s.nom_article}"></td><td th:text="${s.prix_unitaire_article}"> </td><td th:text="${s.description_article}"> </td>
+	
+	</tbody>
+	</table>
+	
+	</div>
+	</div>
+	</div>
+	<div class="col-md-12">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="commande" src="/images/commande.png" height="40" width="30">Commande  </div>
+	<div>
+	
+	<div class="col-md-4">
+	<div class="panel panel-info" >
+	<div class="panel-heading"><img alt="a propos" src="/images/add.png" height="40" width="30">Nouvelle Ligne  </div>
+	
+	ID :<input type="text" name="fname" id="fname"></br>
+    Quantite:<input type="text" name="lname" id="lname"></br>
+   
+		<button   class="btn btn-primary" onclick="addHtmlTableRow();">Add</button>
+        <button  class="btn btn-primary" onclick="removeSelectedRow();">Remove</button>
+	    
+	
+	
+	
+	
+	
+	
+	</div>
+	</div>
+	<div class="col-md-8">
+	<form th:action="@{/Poster_Commande}" method="post">
+	 <input id="nombre_de_ligne" name="nombre_de_ligne" type="hidden" >
+	<div class="container">
+            <table class="table table-striped" id="table"  >
+	 <thead>
+	<tr>
+	<th>ID article</th><th>Quantite</th>
+	</tr>
+	</thead>
+	
+	</table>
+                
+	<button type="submit" class="btn btn-primary" >Commander</button>
+	</form>
+	</div>
+	</div>
+	
+	
+	
+	
+	</div>
+	</div>
+	</div>	
+	
+	</div>
+		
+	
+
+
+</body>
+</html>

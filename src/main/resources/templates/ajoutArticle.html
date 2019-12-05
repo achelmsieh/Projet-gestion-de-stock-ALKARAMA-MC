@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="utf-8"/>
+<title>Ajoute d'un nouveaux article</title>
+
+</head>
+<body>
+<div layout:fragment="content">
+	
+	
+	<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="logo ajout d'article" src="/images/enregistrer.png" height="40" width="30">Ajoute d'un nouveaux Article</div>
+	<div class="panel-body">
+		<form th:action="@{/ajoutArticle}" method="post">
+		<div>
+		<label >nom    :</label>
+		<input type="text" name="nom_article"/>
+		</div>
+	
+		<div>
+		<label >id categorie    :</label>
+		<input type="text" name="categorie_article"/>
+		</div>
+		<div>
+		<label >description :</label>
+		<input type="text" name="description_article"/>
+		</div>
+		<div>
+		<!-- ala fin je ajoutter la photo  -->
+		<label >prix untaire:</label>
+		<input type="text" name="prix_unitaire_article"/> 
+		</div>
+		<button type="submit" class="btn btn-primary">SAVE</button>
+		</form>
+	</div>
+	</div>
+	</div>	
+
+	
+	<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information " src="/images/information.png" height="30" width="30">Les categorie existant</div>
+	<div class="panel-body">	
+	<form th:action="@{/ajoutArticle}" method="get">
+		<table class="table table-striped">
+	<tr>
+	<th>ID categorie</th><th>nom</th>
+	</tr>
+	<tr th:each="c:${listcategorie}">
+		<td th:text="${c.id_categorie}"></td><td th:text="${c.nom_categorie}">
+	
+	
+	</table>
+	<div class="container">
+	<ul class="nav nav-pills">
+	<li th:each="p,status:${pages1}">
+	<a th:href="@{/ajoutArticle(page1=${status.index})}" th:text="${status.index}"></a>
+	
+	</li>
+	</ul>
+	</div>
+		</form>
+	</div>
+	</div>
+	</div>		
+	
+		<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="suprimer " src="/images/delete.png" height="30" width="30">Supprimer Article</div>
+	<div class="panel-body">	
+	
+		<form th:action="@{/Suprimer_article}" method="get">
+			<div>
+				<label>ID Article:</label>
+				<input type="text" name="id_article"/>
+				<button type="submit" class="btn btn-primary">OK</button>
+				<div class="text-danger" th:if="${exception_supresion}" th:text="${exception_supresion}">
+				
+		</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	</div>	
+		<div class="col-md-12">
+	<div class="panel panel-info" >
+	<div class="panel-heading"><img alt="consulter superviseur" src="/images/information.png" height="30" width="30">pour Voir les articles existant</div>
+	<div class="panel-body">			<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="consulter superviseur" src="/images/information.png" height="30" width="30">consultation article par categorie</div>
+	<div class="panel-body">	
+	
+		<form th:action="@{/ajoutArticle}" method="get">
+			<div>
+				<label>consulter categorie:</label>
+				<input type="text" name="id_categorie"/>
+				<button type="submit" class="btn btn-primary">OK</button>
+				<div class="text-danger" th:if="${exception}" th:text="${exception}">
+				
+		</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	</div>	
+		<div class="col-md-8">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information " src="/images/information.png" height="30" width="30">les article qui se trouve dans la categorie: <label th:text="${nom_categorie}"></label></div>
+	<div class="panel-body">	
+
+		<table class="table table-striped">
+	<tr>
+	<th>ID article</th><th>Nom</th><th>Prix untaire</th><th>Description</th>
+	</tr>
+	<tr th:each="s:${listearticleparcat}">
+		<td th:text="${s.id_article}"></td><td th:text="${s.nom_article}"></td><td th:text="${s.prix_unitaire_article}"> </td><td th:text="${s.description_article}"> </td>
+	
+	
+	</table>
+		<div class="container">
+	<ul class="nav nav-pills">
+	<li th:each="p,stat:${pages2}">
+	<a th:href="@{/ajoutArticle(id_categorie=${id_categorie},page2=${stat.index})}" th:text="${stat.index}"></a>
+	
+	</li>
+	</ul>
+	</div>
+	</div>
+	</div>
+	</div></div>
+	</div>
+	</div>	
+</div>
+
+
+</body>
+</html>

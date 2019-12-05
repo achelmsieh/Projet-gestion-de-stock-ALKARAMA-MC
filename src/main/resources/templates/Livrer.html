@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template2">
+<head>
+<meta charset="utf-8"/>
+<title>Vos Livraison</title>
+      
+
+</head>
+<body>
+<div layout:fragment="content">
+	
+	<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information " src="/images/information.png" height="30" width="30">Cosulter les livraison</div>
+	<div class="panel-body">	
+	<form action="Livrer" method="get">
+	<label>id </label>
+	<input type="text" name="id_Livraison"/>
+				<button type="submit" class="btn btn-primary">OK</button>
+	</form>
+	</div>
+	
+	</div>
+	</div>
+	</div>
+
+<div layout:fragment="content">
+
+	<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information " src="/images/information.png" height="30" width="30">les dernier livraison</div>
+	<div class="panel-body">	
+	
+		
+	</div>
+	
+	</div>
+	</div>
+	</div>		
+	
+	
+	
+<div layout:fragment="content">
+	
+		<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information " src="/images/information.png" height="30" width="30">les contenu de la livraison </div>
+	<div class="panel-body">	
+	
+		
+	</div>
+	
+	</div>
+	</div>
+	</div>		
+	
+		
+ 	
+</body>
+</html>

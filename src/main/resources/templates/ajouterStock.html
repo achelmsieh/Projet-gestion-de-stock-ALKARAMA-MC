@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="utf-8"/>
+<title>Ajoute dans le stock d'un article</title>
+
+</head>
+<body>
+<div layout:fragment="content">
+	
+	
+	<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="logo ajout d'article" src="/images/enregistrer.png" height="40" width="30">Ajoute </div>
+	<div class="panel-body">
+		<form th:action="@{/saveStock}" method="post">
+		<div>
+		<label >Id Article :</label>
+		<input type="text" name="id_article"/>
+		</div>
+	
+		<div>
+		<label >quantite   :</label>
+		<input type="text" name="quantite"/>
+		</div>
+		
+		<button type="submit" class="btn btn-primary">Ajouter</button>
+		</form>
+	</div>
+	</div>
+	</div>	
+
+	
+</div>
+
+
+</body>
+</html>

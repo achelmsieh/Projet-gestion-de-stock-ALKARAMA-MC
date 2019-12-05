@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="utf-8"/>
+<title>Departement Logistique</title>
+
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="col-md-4">
+	<div class="panel panel-primary">
+	<div class="panel-heading"> <img alt="logo Superviseur" src="/images/superviseur.png" height="30" width="30">Consultation d'un Superviseur</div>
+	<div class="panel-body">
+		<form th:action="@{/consulterSuprviseur}" method="get">
+			<div>
+				<label>Code Superviseur:</label>
+				<input type="text" name="id_superviseur"/>
+				<button type="submit" class="btn btn-primary">OK</button>
+			</div>
+		</form>
+		<div class="text-danger" th:if="${exception}" th:text="${exception}">
+		</div>
+		 <A href="\ajoutSuperviseur">ajouter un nv. superviseur</A>
+	</div>
+	</div>
+	</div>	
+	<div class="col-md-4">
+	<div class="panel panel-primary" th:if="${superviseur}">
+	<div class="panel-heading"><img alt="logo information" src="/images/information.png" height="30" width="30">Information Superviseur</div>
+	<div class="panel-body"></div>
+	
+		<div>
+		<label> CODE:</label>
+		  <label th:text="${superviseur.id_superviseur}"></label>
+		</div>
+		
+		<div>
+		<label> Nom: </label>
+		  <label th:text="${superviseur.nom_superviseur}" ></label>
+		</div>
+		
+		<div>
+		<label> prenom: </label>
+		  <label th:text="${superviseur.prenom_superviseur}"></label>
+		</div>
+		
+		<div>
+		<label> Date de creation: </label>
+		  <label th:text="${superviseur.date_creation_superviseur}"></label>
+		</div>
+		
+		<div>
+		<label> description : </label>
+		  <label th:text="${superviseur.description_superviseur}"></label>
+		</div>
+		<br>
+		
+	</div>
+	</div>
+	<div class="col-md-4">
+	<div class="panel panel-primary" th:if="${superviseur}">
+	<div class="panel-heading"><img alt="non livrer logo" src="/images/nonlivrer.png" height="30" width="30">Non Livrer</div>
+	
+	<table class="table table-striped">
+	<thead>
+	<tr>
+	<th>Num de Comande</th><th>Date</th>
+	</tr>
+	</thead>
+	<tr th:each="m:${listcomande}" th:if="${m.Status}=='nonlivrer'">
+		<td th:text="${m.id_CommandeSuperviseur}"></td><td th:text="${m.date_Commande}"> </td>
+	
+	
+	</table>
+	<div class="panel-body"></div>
+	</div>
+	</div>		
+	<div class="col-md-12">
+	<div class="panel panel-primary" th:if="${superviseur}">
+	<div class="panel-heading"><img alt="commande logo" src="/images/commande.png" height="30" width="30">COMMANDE</div>
+	<div class="panel-body">
+	<table class="table table-striped">
+	<thead>
+	<tr>
+	<th>Status</th><th>ID</th><th>Date</th>
+	</tr>
+	</thead>
+	<tr th:each="m:${listcomande}">
+		<td th:text="${m.Status}"></td><td th:text="${m.id_CommandeSuperviseur}"></td><td th:text="${m.date_Commande}"> </td>
+	
+	
+	</table>
+	</div>
+	</div>
+	</div>	
+	
+	
+	
+</div>
+
+</body>
+</html>

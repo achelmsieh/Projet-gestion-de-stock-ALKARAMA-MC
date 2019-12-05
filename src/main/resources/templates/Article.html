@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="utf-8"/>
+<title>Article</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="col-md-4">
+	<div class="panel panel-primary">
+	<div class="panel-heading"><img alt="logo Article" src="/images/article.png" height="30" width="30"> Consultation d'un Article</div>
+	<div class="panel-body">
+		<form th:action="@{/consulterArticle}" method="get">
+			<div>
+				<label>Code article:</label>
+				<input type="text" name="id_Article"/>
+				<button type="submit" class="btn btn-primary">OK</button>
+			</div>
+		</form>
+		<div class="text-danger" th:if="${exception}" th:text="${exception}">
+		</div>
+		</br> Vous pouvez aussi:
+		 <ul class="list-group" >
+	<li class="list-group-item">	 <A href="\ajoutArticle">ajouter un nv. article ou consulter les article existant</A></li>
+	<li class="list-group-item">	 <A href="\ajoutecategorie">ajouter une nouvelle categorie ou consulter les article existant</A></li>
+	</ul>
+	</div>
+	</div>
+	</div>	
+	<div class="col-md-3">
+	<div class="panel panel-primary" th:if="${article}">
+	<div class="panel-heading"><img alt="logo information sur le produit" src="/images/information.png" height="30" width="30">Informations Article</div>
+	<div class="panel-body"></div>
+	
+		<div>
+		<label> ID produit:</label>
+		  <label th:text="${article.id_article}"></label>
+		</div>
+		
+		<div>
+		<label> Id categorie: </label>
+		  <label th:text="${article.categorie_article.id_categorie}" ></label>
+		</div>
+		
+		<div>
+		<label> Nom Article: </label>
+		  <label th:text="${article.nom_article}"></label>
+		</div>
+		
+		<div>
+		<label>Prix Unitaire: </label>
+		  <label th:text="${article.prix_unitaire_article}"></label>
+		</div>
+		
+		<div>
+		<label> description : </label>
+		  <label th:text="${article.description_article}"></label>
+		</div>
+		<br>
+		
+	</div>
+	</div>
+ 	<div class="col-md-5">
+	<div class="panel panel-primary" th:if="${article}">
+	<div class="panel-heading"><img alt="logo Article" src="/images/information.png" height="30" width="30">Des articles dans la meme categorie</div>
+	<div class="panel-body">
+	<table class="table table-striped">
+	
+	<tr>
+	<th>ID produit</th><th> Nom</th><th> Description</th><th> prix_unitaire</th>
+	</tr>
+	<tr th:each="l:${list_produit_dans_meme_categorie}">
+		<td th:text="${l.id_article}"></td><td th:text="${l.nom_article}"></td><td th:text="${l.description_article}"> </td><td th:text="${l.prix_unitaire_article}"> </td>
+	
+	
+	</table>
+	</div>
+	</div>
+	</div>		
+	<div class="col-md-12">
+	<div class="panel panel-primary" th:if="${article}">
+	<div class="panel-heading"><img alt="logo des mouvemrnt" src="/images/commande.png" height="30" width="30"> Les movement de stock de Produit</div>
+	<div class="panel-body">
+	<table class="table table-striped">
+	<tr>
+	<th>ID</th><th>Date</th><th>Qantite</th><th>Status</th>
+	</tr>
+	<tr th:each="l:${listcommande}">
+		<td th:text="${l.id_Mouvementdustock}"></td><td th:text="${l.date_du_Mouvementsdustock}"></td><td th:text="${l.qunatite}"> </td><td th:text="${l.status}"> </td>
+	
+	
+	</table>
+	</div>
+	</div>
+	</div>	
+	
+	
+	
+</div>
+
+</body>
+</html>

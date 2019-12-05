@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<link rel="stylesheet" type="text/css"
+href="../ static/css/style.css"
+th:href="@{/css/style.css}" > 
+<head>
+<meta charset="utf-8"/>
+<title>Employe siege</title>
+<script >
+function visibilite(thingId) { 
+	for( i=1;i<=3;i++)
+	{
+	document.getElementById("id_div_"+i).style.display = "none" ;
+	}
+	
+	var targetElement; targetElement = document.getElementById(thingId) ; 
+if (targetElement.style.display == "none") { targetElement.style.display = "" ;
+} else { targetElement.style.display = "none" ; }
+
+	}
+
+</script>
+
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="col-md-4">
+	<div class="panel panel-primary">
+	<div class="panel-heading"> <img alt="logo Superviseur" src="/images/superviseur.png" height="30" width="30">Vos information</div>
+	<div class="panel-body">
+	<div>ID:
+	
+						
+		</div>
+	<div>
+		<label> Nom:</label>
+		
+		</div>
+	<div>
+		<label> Prenom:</label>
+		</div>
+			<div>
+		<label> description:</label>
+		</div>
+	<div>
+		<label>mot de passe:</label>
+		
+		</div >
+			</br> Vous pouvez aussi:
+		 <ul class="list-group" >
+	<li class="list-group-item" >	<button onclick="javascript:visibilite('id_div_1'); return false;"><img alt="logo Superviseur" class="droit" src="/images/modifier.png" height="30" width="30"></button> Modifer votre profil </li>
+	<li class="list-group-item">	 Gestion des admin: <ul class="list-group" > <li class="list-group-item"><button onclick="javascript:visibilite('id_div_2'); return false;"><img alt="logo Superviseur" class="droit" src="/images/add.png" height="30" width="30"></button>		ajouter un admin</li> 
+														 <li class="list-group-item"><button onclick="javascript:visibilite('id_div_3'); return false;"><img alt="logo Superviseur" class="droit" src="/images/delete.png" height="30" width="30"></button>	Suprimer un admin</li> </ul>
+	</li>
+	
+		</ul>
+	</div>
+	</div>
+	</div>
+		
+	
+	
+
+<div class="col-md-4" id="id_div_1" style="display:none;">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="consulter superviseur" src="/images/information.png" height="30" width="30">modifier vos information </div>
+	<div class="panel-body">	
+	
+		<form th:action="@{/modifieremployer}" method="post">
+		
+	<div>
+		<label> Nom:</label>
+		
+						<div id="nom_employerdesiege"><input type="text" name="nom_employerdesiege"></div>
+		</div>
+	<div>
+		<label> Prenom:</label>
+						<div id="prenom_employerdesiege"><input type="text" name="prenom_employerdesiege"></div>	
+		</div>
+			<div>
+		<label> description:</label>
+						<div id="description_employerdesiege"><input type="text" name="description_employerdesiege"></div>
+		</div>
+	<div>
+		<label>mot de passe:</label>
+						 <div id="mot_passe_employerdesiege"><input type="text" name="mot_passe_employerdesiege"></div>
+		
+		</div >
+						<div  id="bouton" >
+	<button type="submit" class="btn btn-primary">modifier</button>
+					</div>
+			</form>
+	</div>
+	</div>
+	</div>
+	
+	
+	<div class="col-md-4" id="id_div_3" style="display:none;">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="consulter superviseur" src="/images/information.png" height="30" width="30">Suprimer </div>
+	<div class="panel-body">	
+	
+		<form th:action="@{/employersiege}" method="post">
+		<div>
+		<label>ID:</label>
+	
+							<input type="text" name="spid_employerdesiegesup">
+		</div>
+		<label>MDP de l'employer:</label>
+						<input type="text" name="spmot_passe_employerdesiege">
+						
+						<div  id="bouton" >
+	<button type="submit" class="btn btn-primary">suprimer</button>
+					</div>
+			</form>
+	</div>
+	</div>
+	</div>
+	
+	<div class="col-md-4" id="id_div_2" style="display:none;">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="consulter superviseur" src="/images/information.png" height="30" width="30">Remplire cette formulaire </div>
+	<div class="panel-body">	
+	
+		
+		<form th:action="@{/employersiege}" method="post">
+		
+	<div>
+		<label> Nom:</label>
+		
+						<input type="text" name="ajnom_employerdesiege">
+		</div>
+	<div>
+		<label> Prenom:</label>
+						<input type="text" name="ajprenom_employerdesiege">
+		</div>
+			<div>
+		<label> description:</label>
+					<input type="text" name="ajdescription_employerdesiege">
+		</div>
+	<div>
+		<label>mot de passe:</label>
+						<input type="text" name="ajmot_passe_employerdesiege">
+		
+		</div >
+						<div  id="bouton" >
+	<button type="submit" class="btn btn-primary">ajouter</button>
+					</div>
+			</form>
+		
+	</div>
+	</div>
+	</div>
+	
+</div>
+</body>
+</html>

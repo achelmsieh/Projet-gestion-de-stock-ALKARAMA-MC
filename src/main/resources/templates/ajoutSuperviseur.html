@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="utf-8"/>
+<title>Ajoute d'un nouveaux superviseur</title>
+</head>
+<body>
+<div layout:fragment="content">
+	
+	
+	<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="logo ajout de superviseur" src="/images/enregistrer.png" height="40" width="30">Ajoute d'un nouveaux Superviseur</div>
+	<div class="panel-body">
+		<form th:action="@{/savesuperviseur}" method="post">
+		<div>
+		<label >nom    :</label>
+		<input type="text" name="nom"/>
+		</div>
+	
+		<div>
+		<label >prenom      :</label>
+		<input type="text" name="prenom"/>
+		</div>
+		<div>
+		<label >description :</label>
+		<input type="text" name="description"/>
+		</div>
+		<div>
+		<label >mot de passe :</label>
+		<input type="text" name="motdepasse"/>
+		</div>
+		<button type="submit" class="btn btn-primary">SAVE</button>
+		</form>
+	</div>
+	</div>
+	</div>	
+	<div class="col-md-8">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information sur les superviseur" src="/images/information.png" height="30" width="30">Les superviseur existant</div>
+	<div class="panel-body">	
+
+		<table class="table table-striped">
+	<tr>
+	<th>ID superviseur</th><th>prenom</th><th>nom</th><th>mot de passe</th><th>Description</th>
+	</tr>
+	<tr th:each="s:${listesuperviseur}">
+		<td th:text="${s.id_superviseur}"></td><td th:text="${s.prenom_superviseur}"></td><td th:text="${s.nom_superviseur}"> </td><td th:text="${s.mot_passe_superviseur}"> </td><td th:text="${s.description_superviseur}"> </td>
+	
+	
+	</table>
+	<div class="container">
+	<ul class="nav nav-pills">
+	<li th:each="p,status:${pages}">
+	<a th:href="@{/ajoutSuperviseur(page=${status.index})}" th:text="${status.index}"></a>
+	</li>
+	</ul>
+	</div>
+	</div>
+	</div>
+	</div>		
+	
+	
+	<div class="col-md-8">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="suprimer superviseur" src="/images/delete.png" height="30" width="30">Suprimer Superviseur</div>
+	<div class="panel-body">	
+	
+		<form th:action="@{/SuprimerSupervisuer}" method="get">
+			<div>
+				<label>ID Superviseur:</label>
+				<input type="text" name="id_superviseur"/>
+				<button type="submit" class="btn btn-primary">OK</button>
+			</div>
+		</form>
+	</div>
+	</div>
+	</div>		
+	
+</div>
+
+</body>
+</html>

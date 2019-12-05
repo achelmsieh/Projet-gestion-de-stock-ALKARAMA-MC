@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="utf-8"/>
+<title>Stock </title>
+</head>
+<body>
+<div layout:fragment="content">
+	
+	
+		
+	<div class="col-md-8">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information sur les superviseur" src="/images/information.png" height="30" width="30">Le stock</div>
+	<div class="panel-body">	
+<form th:action="@{/consulterStock}" method="post">
+		<table class="table table-striped">
+	<thead>
+	<tr>
+	<th>ID </th><th>Article</th><th>quantite</th>
+	</tr>
+	</thead>
+	<tr th:each="s:${listdeStock}">
+ 		<td th:text="${s.article.id_article}"></td> <td th:text="${s.article.nom_article}"></td><td th:text="${s.qunatite}"></td>
+ 	</table>
+</form>
+	</div>
+	</div>
+	</div>		
+	
+	
+
+	
+</div>
+
+</body>
+</html>

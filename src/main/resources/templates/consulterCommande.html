@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="utf-8"/>
+<title>Mouvement du stock </title>
+
+
+</head>
+<body>
+<div layout:fragment="content">
+	
+	
+		
+	<div class="col-md-6">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information sur les superviseur" src="/images/information.png" height="30" width="30">Commande en attends</div>
+	<div class="panel-body">	
+
+		<table class="table table-striped">
+	<thead>
+	<tr>
+	<th>ID </th><th>Date</th><th>Superviseur</th>
+	</tr>
+	</thead>
+	<tr th:each="s:${listcommmande}">
+		<td th:text="${s.id_CommandeSuperviseur}"></td><td th:text="${s.date_Commande}"></td><td th:text="${s.superviseur.nom_superviseur}"> 
+	
+	</table>
+	<form action="/consulterCommande" method="post">
+	<label> information sur une commande:</label><input type="text" name="id_CommandedeSuperviseur"/><button type="submit" class="btn btn-primary"><img alt="information sur les superviseur" src="/images/oki.png" height="30" width="30"></button>
+	</form>
+	</div>
+	</div>
+	</div>	
+		<div class="col-md-6">
+	<div class="panel panel-primary" th:if="${commande}"> 
+	<div class="panel-heading"><img alt="information sur les superviseur" src="/images/information.png" height="30" width="30">Information sur la commande</div>
+	<div class="panel-body">	
+
+		<table class="table table-striped">
+		<label> La commande  <label th:text="${commande.id_CommandeSuperviseur}" ></label> contient :</label> 
+	<thead>
+	<tr>
+	<th>ID </th><th>Article</th><th>Quantite</th>
+	</tr>
+	</thead>
+	<tr th:each="l:${listedeligne_par_une_commande}">
+		<td th:text="${l.id_Lignedecommande}"></td><td th:text="${l.article.nom_article}"></td><td th:text="${l.quantite}"> 
+	
+	</table>
+	<form th:action="@{/livrer}" method="get">
+			<div >
+				
+			infomation sur la commande :<label th:text="${text}" id="text"></label></br>
+				<button type="submit" class="btn btn-primary">Livrer</button>  
+				<input type="text" name="id_CommandeSuperviseur" th:value="${commande.id_CommandeSuperviseur}"  > 
+				
+			</div>
+			<div class="text-danger" th:if="${exception}" th:text="${exception}">
+		</div>
+		</form>
+	</div>
+	</div>
+	</div>			
+	
+	
+</div>
+</body>
+</html>

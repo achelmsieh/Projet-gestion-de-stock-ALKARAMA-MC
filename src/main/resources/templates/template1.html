@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8"/>
+
+<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css"
+th:href="@{/css/bootstrap.css}">
+
+<link rel="stylesheet" type="text/css"
+href="../ static/css/style.css"
+th:href="@{/css/style.css}" > 
+<title>Logistique</title>
+
+
+<link rel="icon" type="image/x-icon" href="images/logopetit.png" />
+</head>
+
+<body>
+<header>
+	<nav><div class="navbar navbar-inverse nav-tabs">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li><a th:href="@{http://www.alkarama-mc.org.ma/}"><img alt="logo de fondation karama" src="/images/karamalogo.png" height="50" width="200"></a></li>
+				
+  				
+				<li><a th:href="@{/employersiege}">Votre profil</a></li>
+				<li><a th:href="@{/MouvementduStock}">Mouvement du Stock</a></li>
+				<li><a th:href="@{/Superviseur}">Superviseur</a></li>
+				<li><a th:href="@{/Article}">Articles</a></li>
+				<li><a th:href="@{/proposAD}">A props</a></li>
+				<li class=dropdown>
+				
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/login?logout}">Déconnexion</a></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	
+</header>
+<section layout:fragment="content"></section>
+
+<div class="navbar-fixed-bottom ">
+<!-- <footer class="panel-footer ">
+<div class=" text-center black ">
+<small >Fondation alkarama micro credit -Rabat</small>
+</div>
+
+</footer> -->
+</div>
+</body>
+</html>

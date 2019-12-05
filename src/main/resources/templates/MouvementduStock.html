@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="utf-8"/>
+<title>Mouvement du stock </title>
+
+
+</head>
+<body>
+<div layout:fragment="content">
+	
+	
+		
+	<div class="col-md-6">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information sur les superviseur" src="/images/information.png" height="30" width="30">Commande en attends</div>
+	<div class="panel-body">	
+
+		<table class="table table-striped">
+	<thead>
+	<tr>
+	<th>ID </th><th>Date</th><th>Superviseur</th>
+	</tr>
+	</thead>
+	<tr th:each="s:${listcommmande}">
+		<td th:text="${s.id_CommandeSuperviseur}"></td><td th:text="${s.date_Commande}"></td><td th:text="${s.superviseur.nom_superviseur}"> 
+	
+	</table>
+	
+	</div>
+	</div>
+	</div>			
+	<div class="col-md-6">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information sur les superviseur" src="/images/information.png" height="30" width="30">Livrer</div>
+	<div class="panel-body">	
+
+		<table class="table table-striped">
+	<thead>
+	<tr>
+	<th>ID </th><th>Date</th><th>Superviseur</th><th>Responsable</th>
+	</tr>
+	 </thead>
+	<tr th:each="s:${listlivraison}">
+		<td th:text="${s.id_Livraision}"></td><td th:text="${s.date_livraison}"></td><td th:text="${s.superviseur.nom_superviseur}"> </td><td th:text="${s.employer_siege.prenom_employerdesiege}"> </td>
+	
+	
+	</table>
+	
+	</div>
+	</div>
+	</div>	
+
+	<div class="col-md-7">
+	 </br> Vous pouvez aussi:
+<ul class="list-group" >
+<li  class="list-group-item"><a href="\consulterstock">consulter le stock.</a></li>
+<li  class="list-group-item"><a href="\ajouterStock">ajouter dans le Stock.</a></li>
+<li  class="list-group-item"><a href="\consulterCommande">Consulter une Commande.</a></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

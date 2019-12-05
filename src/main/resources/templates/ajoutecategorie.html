@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="utf-8"/>
+<title>Ajouter une categorie </title>
+     <script>
+     function ajouter()
+     	{document.getElementById('ajoute').style.display='block';
+     	document.getElementById('suprime').style.display='none';
+     	}
+     function suprimer()
+     	{document.getElementById('suprime').style.display='block';
+     	document.getElementById('ajoute').style.display='none';
+     	}
+     </script>
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="consulter superviseur" src="/images/information.png" height="30" width="30">Ajouter nouvelle Categorie</div>
+	<div class="panel-body">	
+	
+		<form th:action="@{/ajoutecategorie}" method="post">
+			<div>
+				<input type="radio" name="selectoperation"  checked="checked" onchange="ajouter();" />
+				
+				<label>ajouter</label>
+				<input type="radio" name="selectoperation"  onchange="suprimer();"/>
+				<label>suprimer</label>
+	</div>	
+			<div id="ajoute"><label>Nom categorie:</label>
+				<input type="text" name="nom_categorie" />
+				<label>Description categorie:</label>
+				<input type="text" name="description_categorie"/>
+			</div>
+			
+			<div id="suprime"  ><label>ID Categorie:</label>
+				<input type="text" name="id_categorie" />
+				</div>
+				<button type="submit" class="btn btn-primary">OK</button>
+			</form>
+	</div>
+	</div>
+	</div>	
+	<div class="col-md-4">
+	<div class="panel panel-primary" >
+	<div class="panel-heading"><img alt="information " src="/images/information.png" height="30" width="30">Les categorie existant</div>
+	<div class="panel-body">	
+	
+		<table class="table table-striped">
+	<thead>
+	
+	<th>ID categorie</th><th>nom</th><th>description</th>
+	
+	</thead>
+	<tr th:each="c:${listcategorie}">
+		<td th:text="${c.id_categorie}"></td><td th:text="${c.nom_categorie}"><td th:text="${c.description_categorie}">
+	
+	
+	</table>
+	<div class="container">
+	<ul class="nav nav-pills">
+	<li th:each="p,status:${pages}">
+	<a th:href="@{/ajoutecategorie(page1=${status.index})}" th:text="${status.index}"></a>
+	
+	</li>
+	</ul>
+	</div>
+	
+	</div>
+	</div>
+	</div>		
+	
+		
+ 		
+		
+	
+	
+	</div>	
+
+		
+	
+
+
+</body>
+</html>
