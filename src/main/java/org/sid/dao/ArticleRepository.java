@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 
+
 public interface ArticleRepository extends JpaRepository<Articles, Long> {
 
 	@Query(" from Articles as a where a.categorie_article.id_categorie=:x order by id_article desc")
@@ -25,3 +26,4 @@ public interface ArticleRepository extends JpaRepository<Articles, Long> {
 public Page<Articles> quantiearticle(  Pageable pegeable);
 }*/
 //@Query("select a.id_article ,a.nom_article ,((select sum(t.qunatite) from Articles as a join a.tableauxdemouvementdeStock t where t.status='entrer' )-(select sum(t.qunatite) from Articles as a join a.tableauxdemouvementdeStock t where t.status='sortie' )) as quantite from Articles as a order by id_article desc")
+//hola
